@@ -38,15 +38,7 @@ p{color:var(--muted)}
 .btn-amber:hover{background:var(--amber-deep);color:var(--cream);transform:translateY(-2px)}
 .btn-sm{padding:10px 20px;font-size:14px}
 
-/* Top bar */
-.topbar{background:var(--pine-deep);color:var(--sage);font-size:13px}
-.topbar-in{display:flex;justify-content:space-between;align-items:center;gap:24px;height:40px}
-.topbar a{transition:color .2s}
-.topbar a:hover{color:var(--amber)}
-.tb-group{display:flex;align-items:center;gap:20px}
-.tb-group span i,.tb-group a i{color:var(--amber);margin-right:7px;font-size:12px}
-.tb-em{font-weight:600;color:var(--cream)}
-.tb-clock{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums}
+/* Footer shared (tb-social reused inside footer's Get in touch) */
 .tb-social{display:flex;gap:14px}
 .tb-social a i{margin:0;font-size:13px}
 
@@ -370,6 +362,14 @@ body.nav-open,body.modal-open{overflow:hidden}
 /* Footer */
 footer.site{background:var(--ink);color:var(--sage);padding:72px 0 0}
 .foot-grid{display:grid;grid-template-columns:2.1fr 1fr 1.1fr 1.6fr;gap:48px;padding-bottom:56px}
+.foot-contact{list-style:none;padding:0;margin:0 0 18px}
+.foot-contact li{display:flex;gap:12px;font-size:14px;color:#B9C7C0;margin-bottom:12px;align-items:flex-start}
+.foot-contact li i{color:var(--amber);margin-top:4px;width:16px;flex:none;text-align:center}
+.foot-contact a{color:#B9C7C0;transition:.2s}
+.foot-contact a:hover{color:var(--amber)}
+.foot-social{display:flex;gap:10px;flex-wrap:wrap}
+.foot-social a{width:38px;height:38px;border-radius:10px;border:1.5px solid rgba(247,243,235,.18);display:grid;place-items:center;font-size:14px;color:var(--cream);transition:.22s}
+.foot-social a:hover{background:var(--amber);border-color:var(--amber);color:var(--ink)}
 .foot-brand .brand-txt strong{color:var(--cream)}
 .foot-brand p{color:#93A69E;font-size:14px;margin:18px 0 22px;max-width:320px}
 footer h4{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;font-weight:700}
@@ -447,8 +447,6 @@ footer h4{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:v
 }
 @media (max-width:720px){
   section{padding:72px 0}
-  .topbar .tb-group:first-child span:nth-child(2){display:none}
-  .topbar .tb-social{display:none}
   .header-phone{display:none}
   .stats-grid{grid-template-columns:1fr 1fr;gap:28px 0}
   .stat:nth-child(3){border-left:none;padding-left:0}
