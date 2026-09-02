@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Information — Bulamu Hospital Masaka</title>
+<meta name="description" content="Visiting hours, payments, insurance, FAQs and what to bring when you visit Bulamu Hospital Masaka.">
+<meta property="og:title" content="Patient Information — Bulamu Hospital Masaka">
+<meta property="og:description" content="Visiting hours, payments, insurance, FAQs and what to bring when you visit Bulamu Hospital Masaka.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F4A3C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+
+<div class="topbar">
+  <div class="container topbar-in">
+    <div class="tb-group">
+      <span><i class="fa-solid fa-location-dot"></i>Kampala Road · Masaka City, Uganda</span>
+      <span><i class="fa-regular fa-clock"></i>OPD: Mon–Sat 8AM–8PM · Sun 10AM–4PM</span>
+    </div>
+    <div class="tb-group">
+      <a class="tb-em" href="tel:+256772123456"><i class="fa-solid fa-phone-volume"></i>24/7 Emergency: +256 772 123 456</a>
+      <a href="mailto:care@bulamuhospital.co.ug"><i class="fa-solid fa-envelope"></i>care@bulamuhospital.co.ug</a>
+      <div class="tb-social">
+        <a href="https://www.facebook.com/bulamuhospital/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.x.com" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://wa.me/256772123456" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+      <span class="tb-clock"><i class="fa-regular fa-clock"></i><span id="kampalaClock">--:--:--</span>&nbsp;Masaka</span>
+    </div>
+  </div>
+</div>
+
+<header class="site" id="siteHeader">
+  <div class="container header-in">
+    <a class="brand" href="index.html" aria-label="Bulamu Hospital Masaka — home">
+      <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+        <rect width="44" height="44" rx="12" fill="#0F4A3C"/>
+        <path d="M22 8.5 C17.8 11.4 17.8 16.8 22 19.4 C26.2 16.8 26.2 11.4 22 8.5 Z" fill="#F7F3EB"/>
+        <path d="M22 19.4 V34 M13.5 23.5 H30.5" stroke="#F7F3EB" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+        <circle cx="22" cy="23.5" r="3.2" fill="#D9932F"/>
+      </svg>
+      <span class="brand-txt"><strong>Bulamu</strong><small>HOSPITAL · MASAKA</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="services.html">Services</a>
+      <a class="nav-link" href="doctors.html">Doctors</a>
+      <a class="nav-link" href="facilities.html">Facilities</a>
+      <a class="nav-link" href="patients.html">Patients</a>
+      <a class="nav-link" href="news.html">News</a>
+      <a class="nav-link" href="gallery.html">Gallery</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-phone" href="tel:+256772123456">
+        <i class="fa-solid fa-phone-volume"></i>
+        <span><small>Emergency 24/7</small><strong>+256 772 123 456</strong></span>
+      </a>
+      <a class="btn btn-primary btn-sm" href="appointment.html">Book appointment</a>
+      <button class="hamburger" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="drawer" id="drawer" aria-label="Mobile">
+  <a class="d-link" href="index.html">Home</a>
+  <a class="d-link" href="about.html">About Us</a>
+  <a class="d-link" href="services.html">Services &amp; Departments</a>
+  <a class="d-link" href="doctors.html">Our Doctors</a>
+  <a class="d-link" href="facilities.html">Facilities</a>
+  <a class="d-link" href="patients.html">Patient Information</a>
+  <a class="d-link" href="news.html">News &amp; Updates</a>
+  <a class="d-link" href="gallery.html">Gallery</a>
+  <a class="d-link" href="contact.html">Contact</a>
+  <a class="btn btn-primary d-cta" href="appointment.html">Book an appointment</a>
+  <div class="d-contact">
+    <span><i class="fa-solid fa-phone-volume"></i>+256 772 123 456 (24/7)</span>
+    <span><i class="fa-solid fa-location-dot"></i>Kampala Road, Masaka City</span>
+    <span><i class="fa-brands fa-facebook"></i>facebook.com/bulamuhospital</span>
+  </div>
+</nav>
+<div class="overlay" id="overlay"></div>
+
+<main>
+<section class="page-hero">
+  <div class="container">
+    <p class="breadcrumbs"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i>Patients</p>
+    <p class="eyebrow">Patient information</p>
+    <h1>Everything you need, before you visit.</h1>
+    <p>Clear answers on visits, payments and paperwork &mdash; so the only thing you worry about is getting better.</p>
+  </div>
+</section>
+
+<section id="patients">
+  <div class="container">
+    <div class="journey reveal">
+      <ol>
+        <li><span class="j-circle">01</span><div><h4>Register &amp; triage</h4><p>Front desk, ID, and a quick nurse assessment.</p></div></li>
+        <li><span class="j-circle">02</span><div><h4>See a doctor</h4><p>Consultation with the right specialist.</p></div></li>
+        <li><span class="j-circle">03</span><div><h4>Tests &amp; diagnosis</h4><p>Lab and imaging on site, same day.</p></div></li>
+        <li><span class="j-circle">04</span><div><h4>Treatment plan</h4><p>Explained clearly, in the language you prefer.</p></div></li>
+        <li><span class="j-circle">05</span><div><h4>Pharmacy &amp; payment</h4><p>One counter &mdash; cash, MoMo, Airtel or card.</p></div></li>
+        <li><span class="j-circle">06</span><div><h4>Follow-up</h4><p>Review booked before you leave, results by SMS.</p></div></li>
+      </ol>
+    </div>
+    <div class="pat-grid">
+      <div class="reveal">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What are the visiting hours?<i class="fa-solid fa-plus"></i></button>
+          <div class="faq-a"><div class="faq-a-in"><p>General wards welcome visitors from 10:00 AM&ndash;12:00 PM and 4:00&ndash;6:00 PM daily. Maternity visits are 2:00&ndash;4:00 PM, and visits to high-dependency patients are arranged with the nursing team so that monitoring is never interrupted.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What should I bring as a new patient?<i class="fa-solid fa-plus"></i></button>
+          <div class="faq-a"><div class="faq-a-in"><p>A national ID, any previous medical records or discharge summaries, your insurance card if you are covered, and a referral letter if another facility issued one. Nothing else &mdash; registration takes about five minutes.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Which insurance providers do you work with?<i class="fa-solid fa-plus"></i></button>
+          <div class="faq-a"><div class="faq-a-in"><p>We are accredited with the major Ugandan insurers and several corporate schemes &mdash; see the list beside this section. If your provider is not listed, ask at the billing desk; we can usually arrange direct billing within a few days. Self-paying patients are always welcome.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How and when do I receive my lab results?<i class="fa-solid fa-plus"></i></button>
+          <div class="faq-a"><div class="faq-a-in"><p>Routine tests are ready the same day and sent to your phone by SMS with a collection code. Cultures and specialised panels take 24&ndash;72 hours. Results can also be collected at the laboratory with your receipt.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Do you treat emergencies before payment?<i class="fa-solid fa-plus"></i></button>
+          <div class="faq-a"><div class="faq-a-in"><p>Yes &mdash; always. Anyone who arrives at our casualty entrance is stabilised and treated first; billing conversations happen afterwards, never at the door. This is a standing policy of the hospital.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I request an ambulance?<i class="fa-solid fa-plus"></i></button>
+          <div class="faq-a"><div class="faq-a-in"><p>Yes. Call +256 772 123 456 at any hour. Two ambulances are on standby for Masaka City and the greater region &mdash; Rakai, Lwengo, Kalungu, Bukomansimbi and Lyantonde.</p></div></div>
+        </div>
+      </div>
+      <aside class="visit-card reveal" data-d=".12">
+        <h3>Prepare for your visit</h3>
+        <div class="vc-block">
+          <h4>Opening hours</h4>
+          <div class="vc-row"><span>General OPD</span><strong>Mon&ndash;Sat &middot; 8AM&ndash;8PM</strong></div>
+          <div class="vc-row"><span>Sunday clinic</span><strong>10AM&ndash;4PM</strong></div>
+          <div class="vc-row"><span>Pharmacy</span><strong>Open 24 hours</strong></div>
+          <div class="vc-row hl"><span>Emergency unit</span><strong>Open 24/7</strong></div>
+        </div>
+        <div class="vc-block">
+          <h4>Ways to pay</h4>
+          <div class="pay-row">
+            <span class="pay-pill"><i class="fa-solid fa-money-bill-1"></i>Cash</span>
+            <span class="pay-pill"><i class="fa-solid fa-mobile-screen-button"></i>MTN MoMo</span>
+            <span class="pay-pill"><i class="fa-solid fa-mobile-screen-button"></i>Airtel Money</span>
+            <span class="pay-pill"><i class="fa-solid fa-credit-card"></i>Visa / Mastercard</span>
+          </div>
+        </div>
+        <div class="vc-block">
+          <h4>Insurance partners</h4>
+          <div class="ins-tags">
+            <a href="#" title="AAR Insurance"><img src="img/insurance cover/AAR.jpg" alt="AAR Insurance logo">AAR</a>
+            <a href="#" title="Jubilee Insurance"><img src="img/insurance cover/jubilee.jpg" alt="Jubilee Insurance logo">Jubilee</a>
+            <a href="#" title="ICEA Lion"><img src="img/insurance cover/IAA.jpg" alt="ICEA Lion logo">ICEA Lion</a>
+            <a href="#" title="Sanlam"><img src="img/insurance cover/sanlam.jpg" alt="Sanlam logo">Sanlam</a>
+            <a href="#" title="Prudential"><img src="img/insurance cover/XCEE.jpg" alt="Prudential logo">Prudential</a>
+            <a href="#" title="Liberty Life"><img src="img/insurance cover/liberty.jpg" alt="Liberty Life logo">Liberty</a>
+            <span class="ins-extra">+ corporate schemes</span>
+          </div>
+        </div>
+        <div class="em-note">
+          <i class="fa-solid fa-truck-medical"></i>
+          <span><strong>In an emergency, come straight to the casualty entrance.</strong> We stabilise first &mdash; paperwork later.</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="index.html">
+          <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+            <rect width="44" height="44" rx="12" fill="#D9932F"/>
+            <path d="M22 8.5 C17.8 11.4 17.8 16.8 22 19.4 C26.2 16.8 26.2 11.4 22 8.5 Z" fill="#152420"/>
+            <path d="M22 19.4 V34 M13.5 23.5 H30.5" stroke="#152420" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+            <circle cx="22" cy="23.5" r="3.2" fill="#F7F3EB"/>
+          </svg>
+          <span class="brand-txt"><strong>Bulamu</strong><small style="color:#7E938B">HOSPITAL · MASAKA</small></span>
+        </a>
+        <p>A private general hospital in the heart of Masaka — with emergency care that never closes. <em>Bulamu</em> means life; protecting yours is our work.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/bulamuhospital/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.x.com" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Hospital</h4>
+        <ul class="foot-links">
+          <li><a href="about.html">About us</a></li>
+          <li><a href="doctors.html">Our doctors</a></li>
+          <li><a href="facilities.html">Facilities</a></li>
+          <li><a href="news.html">News &amp; updates</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Departments</h4>
+        <ul class="foot-links" id="footDepts"></ul>
+      </div>
+      <div>
+        <h4>Stay in touch</h4>
+        <p style="font-size:14px;color:#B9C7C0">Hospital news and free screening camp dates, once a month. No spam, ever.</p>
+        <form class="news-form" id="newsForm">
+          <input type="email" id="newsEmail" placeholder="Your email address" aria-label="Email address">
+          <button class="btn btn-amber btn-sm" type="submit">Subscribe</button>
+        </form>
+        <p class="foot-note">For emergencies, always call <a href="tel:+256772123456" style="color:var(--amber);font-weight:700">+256 772 123 456</a>.</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="year"></span> Bulamu Hospital Masaka &middot; Licence UMDPC/PH/0000 &middot; All rights reserved.</span>
+      <div class="fb-links">
+        <button data-modal="privacyModal">Privacy &amp; patient rights</button>
+        <a href="#top">Back to top &uarr;</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<div id="toastWrap" aria-live="polite"></div>
+
+<div class="modal" id="articleModal" aria-hidden="true" role="dialog" aria-label="News article">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card">
+    <button class="modal-close" data-close aria-label="Close article"><i class="fa-solid fa-xmark"></i></button>
+    <div id="articleBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="privacyModal" aria-hidden="true" role="dialog" aria-label="Privacy and patient rights">
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card privacy">
+    <button class="modal-close" data-close aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    <span class="n-tag" style="position:static;display:inline-block;margin-bottom:12px">Privacy &amp; patient rights</span>
+    <h3 class="am-title" style="margin-top:0">Your information is safe with us.</h3>
+    <h4>What we collect</h4>
+    <p>Appointment requests sent through this website are used only to arrange your visit and to contact you about it. We never sell, rent or share patient information with third parties for marketing.</p>
+    <h4>Medical confidentiality</h4>
+    <p>All clinical records at Bulamu Hospital are confidential. Information is released only to the patient, a nominated next of kin, or where the law requires it.</p>
+    <h4>Your rights as a patient</h4>
+    <p>You have the right to clear explanations in a language you understand, a second opinion, an itemised bill, and to raise a compliment or complaint at the front desk or through care@bulamuhospital.co.ug.</p>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+  <span class="lb-count" id="lbCount"></span>
+  <button class="lb-close" id="lbClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+  <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
