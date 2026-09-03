@@ -114,7 +114,11 @@
     if (!deptList || !deptPanel) return;
 
     function deptHTML(d) {
-      return '<div class="dp-head"><span class="dp-icon"><i class="fa-solid ' + d.icon + '"></i></span>' +
+      var img = d.img
+        ? '<div class="dp-img"><img src="' + d.img + '" alt="' + d.name + ' at Bulamu Medical Clinic"></div>'
+        : '';
+      return img +
+        '<div class="dp-head"><span class="dp-icon"><i class="fa-solid ' + d.icon + '"></i></span>' +
         '<div><span class="dp-tag">' + d.tag + '</span><h3>' + d.name + '</h3></div></div>' +
         '<p class="dp-desc">' + d.desc + '</p>' +
         '<ul class="dp-services">' + d.services.map(s => '<li><i class="fa-solid fa-check"></i>' + s + '</li>').join('') + '</ul>' +

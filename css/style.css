@@ -152,6 +152,15 @@ body.nav-open,body.modal-open{overflow:hidden}
 .values strong{display:block;font-size:15.5px}
 .values span.v-desc{font-size:14px;color:var(--muted)}
 .quote{margin-top:60px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:34px 38px;display:flex;gap:22px;align-items:flex-start;box-shadow:var(--sh)}
+
+.svc-grid{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.svc-grid li{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 20px;display:flex;flex-direction:column;gap:8px;transition:.22s}
+.svc-grid li:hover{border-color:var(--pine);transform:translateY(-2px);box-shadow:var(--sh)}
+.svc-grid i{color:var(--amber-deep);font-size:22px;width:42px;height:42px;border-radius:12px;background:var(--sage);display:grid;place-items:center;flex:none}
+.svc-grid strong{font-size:14.5px;font-weight:700;color:var(--ink);display:block}
+.svc-grid span{font-size:13px;color:var(--muted);line-height:1.5}
+
+#insurance .ins-tags{font-size:14px;font-weight:600;padding:14px;text-align:center}
 .quote i{color:var(--amber);font-size:26px;margin-top:4px}
 .quote blockquote{font-family:var(--fd);font-style:italic;font-size:19px;line-height:1.5;color:var(--ink)}
 .quote cite{display:block;margin-top:12px;font-style:normal;font-size:13px;color:var(--muted);font-weight:600}
@@ -169,6 +178,8 @@ body.nav-open,body.modal-open{overflow:hidden}
 .dept-item.active .di-tag{background:rgba(247,243,235,.16);color:var(--sage)}
 .dept-panel{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:38px 42px;box-shadow:var(--sh);transition:opacity .18s,transform .18s;display:flex;flex-direction:column}
 .dept-panel.swap{opacity:0;transform:translateY(10px)}
+.dp-img{margin:-38px -42px 22px;aspect-ratio:16/7;overflow:hidden;border-radius:22px 22px 0 0}
+.dp-img img{width:100%;height:100%;object-fit:cover;display:block}
 .dp-head{display:flex;gap:18px;align-items:center;margin-bottom:18px}
 .dp-icon{width:58px;height:58px;border-radius:16px;background:var(--pine);color:var(--amber);display:grid;place-items:center;font-size:23px;flex:none}
 .dp-tag{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-deep)}
@@ -435,6 +446,7 @@ footer h4{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:v
   .float-card.opd{left:-8px}
   .float-card.next{right:-6px}
   .about-grid,.fac-wrap,.pat-grid,.book-grid,.contact-grid{grid-template-columns:1fr;gap:56px}
+  .svc-grid{grid-template-columns:repeat(3,1fr)}
   .dept-wrap{grid-template-columns:1fr}
   .dept-list{flex-direction:row;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
   .dept-list::-webkit-scrollbar{display:none}
@@ -459,12 +471,15 @@ footer h4{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:v
   .dp-services{grid-template-columns:1fr}
   .dp-meta{grid-template-columns:1fr}
   .dept-panel{padding:28px 24px}
+  .dp-img{margin:-28px -24px 18px;border-radius:18px 18px 0 0;aspect-ratio:16/9}
   .journey ol{flex-direction:column;gap:22px;text-align:left}
   .journey li{display:flex;gap:18px;text-align:left;padding:0}
   .j-circle{margin:0}
   .journey li::before{display:none}
   .pat-grid{gap:32px}
   .pat-grid > .reveal{width:100%;max-width:100%;min-width:0}
+  .svc-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .svc-grid li{padding:18px 16px}
   #patients .container{overflow-x:hidden}
   .faq-q{font-size:14.5px;padding:14px 16px;gap:12px}
   .faq-a p{padding:0 16px 16px;font-size:14px}
