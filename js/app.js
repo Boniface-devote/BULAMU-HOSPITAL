@@ -227,7 +227,7 @@
 
     newsWrap.innerHTML =
       '<div class="news-featured">' +
-        '<div class="nf-img"><img src="https://picsum.photos/seed/' + D.ARTICLES[0].seed + '/900/620.jpg" alt="' + D.ARTICLES[0].title + '"><span class="n-tag">' + D.ARTICLES[0].tag + '</span></div>' +
+        '<div class="nf-img"><img src="' + (D.ARTICLES[0].img || 'https://picsum.photos/seed/' + D.ARTICLES[0].seed + '/900/620.jpg') + '" alt="' + D.ARTICLES[0].title + '"><span class="n-tag">' + D.ARTICLES[0].tag + '</span></div>' +
         '<div class="nf-body">' +
           '<p class="n-date">' + D.ARTICLES[0].date + '</p><h3>' + D.ARTICLES[0].title + '</h3>' +
           '<p class="n-lead">' + D.ARTICLES[0].lead + '</p>' +
@@ -250,8 +250,9 @@
         body.innerHTML =
           '<span class="n-tag" style="position:static;display:inline-block">' + a.tag + '</span>' +
           '<p class="n-date" style="margin-top:14px">' + a.date + '</p>' +
+          '<p class="am-byline">By ' + (a.byline || 'the Bulamu News Desk') + '</p>' +
           '<h3 class="am-title">' + a.title + '</h3>' +
-          '<div class="am-body"><img src="https://picsum.photos/seed/' + a.seed + '/1000/500.jpg" alt="">' +
+          '<div class="am-body"><img src="' + (a.img || 'https://picsum.photos/seed/' + a.seed + '/1000/500.jpg') + '" alt="' + a.title + '">' +
           a.body.map(p => '<p>' + p + '</p>').join('') + '</div>';
       }
       const modal = $('#articleModal');
@@ -262,34 +263,87 @@
   /* ============ Gallery + lightbox ============ */
   function initGallery() {
     const galGrid = $('#galGrid');
+    const galFilters = $('#galFilters');
+    const galSearch = $('#galSearch');
+    const galCount = $('#galCount');
     const lightbox = $('#lightbox');
     const lbImg = $('#lbImg'), lbCap = $('#lbCap'), lbCount = $('#lbCount');
     if (!galGrid || !lightbox) return;
 
-    galGrid.innerHTML = D.GALLERY.map((g, i) =>
-      '<figure class="gal-item" data-i="' + i + '" tabindex="0" role="button" aria-label="View: ' + g.cap + '">' +
-        '<img src="https://picsum.photos/seed/' + g.seed + '/' + g.w + '/' + g.h + '.jpg" alt="' + g.cap + '" loading="lazy">' +
-        '<figcaption>' + g.cap + '</figcaption>' +
-      '</figure>').join('');
+    const items = Array.isArray(D.GALLERY) ? D.GALLERY : [];
+
+    function slugToTitle(s) {
+      return s.replace(/[-_]+/g, ' ').replace(/\.[^.]+$/, '').replace(/\b\w/g, c => c.toUpperCase());
+    }
+
+    // Normalize items (ensure src, cap, category)
+    items.forEach(it => {
+      if (!it.src && it.seed && it.w && it.h) it.src = 'https://picsum.photos/seed/' + it.seed + '/800/' + Math.round(800 * (it.h / (it.w || 1))); 
+      if (!it.srcLarge && it.src) it.srcLarge = it.src;
+      if (!it.cap) it.cap = it.filename ? slugToTitle(it.filename) : (it.src ? slugToTitle(it.src.split('/').pop()) : 'Photo');
+      if (!it.category) {
+        const parts = (it.src || '').split('/').filter(Boolean);
+        it.category = parts.length > 1 ? parts[1] : 'general';
+      }
+    });
+
+    const categories = Array.from(new Set(items.map(i => i.category || 'general'))).sort();
+
+    // Render filters
+    if (galFilters) {
+      galFilters.innerHTML = '<button class="chip active" data-filter="all">All</button>' +
+        categories.map(c => '<button class="chip" data-filter="' + c + '">' + c.replace(/[-_]/g, ' ') + '</button>').join('');
+      galFilters.addEventListener('click', e => {
+        const b = e.target.closest('.chip'); if (!b) return;
+        $$('#galFilters .chip').forEach(x => x.classList.toggle('active', x === b));
+        renderGrid();
+      });
+    }
+
+    function renderGrid() {
+      const active = galFilters ? galFilters.querySelector('.chip.active').dataset.filter : 'all';
+      const q = galSearch ? galSearch.value.trim().toLowerCase() : '';
+      const visible = items.map((it, i) => ({ it, i }))
+        .filter(o => (active === 'all' || o.it.category === active))
+        .filter(o => (!q) || (o.it.cap && o.it.cap.toLowerCase().includes(q)) || (o.it.filename && o.it.filename.toLowerCase().includes(q)));
+
+      galGrid.innerHTML = visible.map((v, idx) => {
+        const g = v.it;
+        return '<figure class="gal-item" data-idx="' + v.i + '" tabindex="0" role="button" aria-label="View: ' + (g.cap || '') + '">' +
+          '<img src="' + g.src + '" alt="' + (g.cap || '') + '" loading="lazy" draggable="false">' +
+          '<figcaption><strong>' + (g.cap || '') + '</strong><small>' + (g.category || '') + '</small></figcaption>' +
+        '</figure>';
+      }).join('');
+
+      if (galCount) galCount.textContent = visible.length + ' photos';
+    }
 
     let lbIndex = 0;
     function updateLB() {
-      const g = D.GALLERY[lbIndex];
-      lbImg.src = 'https://picsum.photos/seed/' + g.seed + '/1200/' + Math.round(1200 * g.h / g.w) + '.jpg';
-      lbImg.alt = g.cap; lbCap.textContent = g.cap;
-      lbCount.textContent = (lbIndex + 1) + ' / ' + D.GALLERY.length;
+      const g = items[lbIndex];
+      lbImg.src = g.srcLarge || g.src;
+      lbImg.alt = g.cap || '';
+      lbCap.textContent = g.cap || '';
+      lbCount.textContent = (lbIndex + 1) + ' / ' + items.length;
     }
-    function openLB(i) { lbIndex = i; updateLB(); lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden', 'false'); document.body.classList.add('modal-open'); }
+    function openLBByOriginalIndex(origIndex) { lbIndex = origIndex; updateLB(); lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden', 'false'); document.body.classList.add('modal-open'); }
     function closeLB() { lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden', 'true'); document.body.classList.remove('modal-open'); }
 
-    galGrid.addEventListener('click', e => { const f = e.target.closest('.gal-item'); if (f) openLB(+f.dataset.i); });
-    galGrid.addEventListener('keydown', e => { const f = e.target.closest('.gal-item'); if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLB(+f.dataset.i); } });
+    galGrid.addEventListener('click', e => { const f = e.target.closest('.gal-item'); if (f) openLBByOriginalIndex(+f.dataset.idx); });
+    galGrid.addEventListener('keydown', e => { const f = e.target.closest('.gal-item'); if (f && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openLBByOriginalIndex(+f.dataset.idx); } });
 
     const lbClose = $('#lbClose'), lbPrev = $('#lbPrev'), lbNext = $('#lbNext');
     if (lbClose) lbClose.addEventListener('click', closeLB);
-    if (lbPrev) lbPrev.addEventListener('click', () => { lbIndex = (lbIndex - 1 + D.GALLERY.length) % D.GALLERY.length; updateLB(); });
-    if (lbNext) lbNext.addEventListener('click', () => { lbIndex = (lbIndex + 1) % D.GALLERY.length; updateLB(); });
+    if (lbPrev) lbPrev.addEventListener('click', () => { lbIndex = (lbIndex - 1 + items.length) % items.length; updateLB(); });
+    if (lbNext) lbNext.addEventListener('click', () => { lbIndex = (lbIndex + 1) % items.length; updateLB(); });
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
+
+    if (galSearch) {
+      galSearch.addEventListener('input', () => renderGrid());
+      galSearch.addEventListener('search', () => renderGrid());
+    }
+
+    renderGrid();
   }
 
   /* ============ Modals (article + privacy) ============ */

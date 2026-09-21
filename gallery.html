@@ -81,6 +81,13 @@
 
 <section id="gallery">
   <div class="container">
+    <div class="gal-tools">
+      <div class="gal-filters" id="galFilters" aria-hidden="false"></div>
+      <div class="gal-search">
+        <input id="galSearch" type="search" placeholder="Search photos, e.g. theatre, maternity" aria-label="Search gallery">
+        <span id="galCount" class="gal-count"></span>
+      </div>
+    </div>
     <div class="gal-grid reveal" id="galGrid" data-d=".08"></div>
   </div>
 </section>
@@ -183,6 +190,7 @@
 </div>
 
 <script src="js/data.js"></script>
+<script src="js/gallery-data.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
