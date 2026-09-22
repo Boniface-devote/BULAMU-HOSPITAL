@@ -111,7 +111,29 @@
     const deptList = $('#deptList');
     const deptPanel = $('#deptPanel');
     const apDept = $('#apDept');
-    if (!deptList || !deptPanel) return;
+
+    // Ensure the appointment page select is populated even when the services
+    // widgets (`deptList` / `deptPanel`) are not present on this page.
+    if (apDept && Array.isArray(D.DEPARTMENTS) && D.DEPARTMENTS.length) {
+      apDept.innerHTML = '<option value="">Choose a department…</option>' +
+        D.DEPARTMENTS.map(d => '<option value="' + d.id + '">' + d.name + '</option>').join('');
+      const pre = localStorage.getItem('bulamu_pref_dept');
+      if (pre) { apDept.value = pre; localStorage.removeItem('bulamu_pref_dept'); }
+    }
+
+    if (!deptList || !deptPanel) {
+      // If the services widgets are not present, still listen for clicks on
+      // department links so we can save a preselection to localStorage
+      // before navigation to the booking form.
+      document.addEventListener('click', e => {
+        const l = e.target.closest('[data-dept-link]');
+        if (l) {
+          localStorage.setItem('bulamu_pref_dept', l.dataset.deptLink);
+          toast('Department preselected; open booking form to continue.', 'file-medical');
+        }
+      });
+      return;
+    }
 
     function deptHTML(d) {
       var img = d.img
@@ -155,9 +177,13 @@
     /* Preselect department from links */
     document.addEventListener('click', e => {
       const l = e.target.closest('[data-dept-link]');
-      if (l && apDept) {
+      if (!l) return;
+      if (apDept) {
         apDept.value = l.dataset.deptLink;
         toast('Department preselected in the booking form.', 'file-medical');
+      } else {
+        localStorage.setItem('bulamu_pref_dept', l.dataset.deptLink);
+        toast('Department preselected; open booking form to continue.', 'file-medical');
       }
     });
   }
@@ -215,8 +241,13 @@
       const card = e.target.closest('.doc-card');
       if (!card) return;
       const apDept = $('#apDept');
-      if (apDept) apDept.value = card.dataset.dept;
-      toast(card.dataset.name + ' preselected — the booking form is ready for you.', 'user-doctor');
+      if (apDept) {
+        apDept.value = card.dataset.dept;
+        toast(card.dataset.name + ' preselected — the booking form is ready for you.', 'user-doctor');
+      } else {
+        localStorage.setItem('bulamu_pref_dept', card.dataset.dept);
+        toast(card.dataset.name + ' preselected — open the booking form to continue.', 'user-doctor');
+      }
     });
   }
 
@@ -481,16 +512,19 @@
     const apDate = $('#apDate');
     if (!apForm) return;
 
-    /* Populate departments even if there's no dept-explorer on the page */
-    if (apDept && !apDept.options.length) {
+    /* Populate departments from shared data (always ensure options exist).
+       Preserve current selection if present. */
+    if (apDept && Array.isArray(D.DEPARTMENTS) && D.DEPARTMENTS.length) {
+      const cur = apDept.value;
       apDept.innerHTML = '<option value="">Choose a department…</option>' +
         D.DEPARTMENTS.map(d => '<option value="' + d.id + '">' + d.name + '</option>').join('');
+      if (cur) apDept.value = cur;
     }
     if (apDate) apDate.min = new Date().toISOString().slice(0, 10);
 
     function setErr(el, msg) { const f = el.closest('.field'); f.classList.add('invalid'); const er = f.querySelector('.err'); if (er) er.textContent = msg; }
 
-    apForm.addEventListener('submit', e => {
+    apForm.addEventListener('submit', async e => {
       e.preventDefault();
       apForm.querySelectorAll('.field').forEach(f => {
         f.classList.remove('invalid');
@@ -524,19 +558,40 @@
         ].map(r => '<li><span>' + r[0] + '</span><strong>' + r[1] + '</strong></li>').join('');
       }
       try {
+        // Save locally as a backup
         const arr = JSON.parse(localStorage.getItem('bulamu_appointments') || '[]');
         arr.push({ ref, name: name.value.trim(), phone: phone.value.trim(), dept: apDept.value, date: apDate.value, ts: Date.now() });
         localStorage.setItem('bulamu_appointments', JSON.stringify(arr));
       } catch (err) { /* ignore */ }
 
-      // Submit to configured form action (e.g., Formspree) while keeping UX
+      // Submit to configured form action (Formspree). Wait for a success response
+      // before showing the success UI so the user knows whether the message sent.
       try {
         const formData = new FormData(apForm);
         formData.append('reference', ref);
-        // send but don't block; show success immediately
-        fetch(apForm.action, { method: apForm.method || 'POST', body: formData, mode: 'cors' }).catch(() => {});
-      } catch (err) { /* ignore */ }
+        // add reply-to and subject fields expected by many form services
+        if (email && email.value) formData.append('_replyto', email.value);
+        formData.append('_subject', 'Appointment request ' + ref);
 
+        const resp = await fetch(apForm.action, {
+          method: apForm.method || 'POST',
+          body: formData,
+          mode: 'cors',
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!resp.ok) {
+          // Try to read JSON error for more context (best-effort)
+          let msg = 'Submission failed — please try again or call reception.';
+          try { const j = await resp.json(); if (j && j.error) msg = j.error; } catch (e) {}
+          toast(msg, 'circle-exclamation');
+          return;
+        }
+      } catch (err) {
+        toast('Network error — could not send request. Please try again or call reception.', 'circle-exclamation');
+        return;
+      }
+
+      // Only show success UI after the POST completed successfully
       apForm.hidden = true; const fs = $('#formSuccess'); if (fs) fs.hidden = false;
       toast('Appointment request sent — reference ' + ref + '.');
     });
