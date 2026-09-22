@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://example.com/sitemap.xml
-# Replace https://example.com with your site URL when available
+Sitemap: https://boniface-devote.github.io/BULAMU-HOSPITAL/sitemap.xml
+# Hosted GitHub Pages site

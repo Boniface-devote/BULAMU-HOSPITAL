@@ -528,6 +528,15 @@
         arr.push({ ref, name: name.value.trim(), phone: phone.value.trim(), dept: apDept.value, date: apDate.value, ts: Date.now() });
         localStorage.setItem('bulamu_appointments', JSON.stringify(arr));
       } catch (err) { /* ignore */ }
+
+      // Submit to configured form action (e.g., Formspree) while keeping UX
+      try {
+        const formData = new FormData(apForm);
+        formData.append('reference', ref);
+        // send but don't block; show success immediately
+        fetch(apForm.action, { method: apForm.method || 'POST', body: formData, mode: 'cors' }).catch(() => {});
+      } catch (err) { /* ignore */ }
+
       apForm.hidden = true; const fs = $('#formSuccess'); if (fs) fs.hidden = false;
       toast('Appointment request sent — reference ' + ref + '.');
     });
