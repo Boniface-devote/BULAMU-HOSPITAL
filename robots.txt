@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://boniface-devote.github.io/BULAMU-HOSPITAL/sitemap.xml
-# Hosted GitHub Pages site
+Sitemap: https://bulamu-hospital.vercel.app/sitemap.xml
+Host: bulamu-hospital.vercel.app
